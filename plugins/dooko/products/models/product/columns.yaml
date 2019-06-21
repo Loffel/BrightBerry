@@ -11,6 +11,5 @@ columns:
         relation: category
     created_at:
         label: 'Дата создания'
-        type: date
-        invisible: false
+        type: datetime
         sortable: true

@@ -64,14 +64,14 @@ function onEnd(){
                     {{ product.description_short|raw }}
                 </div>
                 <div class="product_img">
-                    <img src="{{ product.photo_thumb.path }}" alt="product.photo_thumb.description">
+                    <img src="{{ product.photo_thumb.path }}" alt="{{ product.photo_thumb.description }}">
                 </div>
             </div>
             {% if prevExists != null %}
-            <a class="prod_prev" href="/products/{{prevExists.category.slug}}/{{prevExists.slug}}">предыдущий<br>объект</a>
-            {% endif %}
+            <a class="prod_prev" href="{{ '' | page({category:prevExists.category.slug,slug:prevExists.slug}) }}">предыдущий<br>объект</a>
+            {% endif %} 
             {% if nextExists != null %}
-            <a class="prod_next" href="/products/{{nextExists.category.slug}}/{{nextExists.slug}}">следующий<br>объект</a>
+            <a class="prod_next" href="{{ '' | page({category:nextExists.category.slug,slug:nextExists.slug}) }}">следующий<br>объект</a>
             {% endif %}
         </div>
     </div>

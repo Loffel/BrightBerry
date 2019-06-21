@@ -19,6 +19,7 @@ pageNumber = "{{ :page }}"
 ==
 <?php
 use Dooko\Products\Models\Category;
+use Dooko\Products\Models\Product;
 
 function onEnd(){
     $category = Category::where('slug',$this->param('slug'))->first();
@@ -26,6 +27,28 @@ function onEnd(){
     if(isset($category)) {
         $this->page->title = $this['category_name'] = $category->title;
     }
+}
+
+function onLoadMore(){
+    $category = Category::where('slug',$this->param('slug'))->first();
+    $products = Product::where('category_id', $category->id)->offset(6)->limit(10000)->get();
+
+    $products_html = "";
+
+    foreach($products as $product){
+        $products_html .= '<a href="/works/'.$product->category->slug.'/'.$product->slug.'" class="house_item">
+            <div class="house_item_img"><img src="'.$product->photo_thumb->path.'" alt="'.$product->photo_thumb->description.'"></div>
+            <p><span>'.$product->name.'</span></p>
+            <div class="house_desc">
+                '.strip_tags($product->description_short).'
+            </div>
+        </a>';
+    }
+
+    return [
+        '@.house_container' => $products_html,
+        '#loadMoreButton' => ''
+    ];
 }
 ?>
 ==
@@ -46,4 +69,4 @@ function onEnd(){
         </div>
     </div>
 </div>
-<a class="house_btn yellow_btn" href="#">показать все</a>
+<div id="loadMoreButton"><a data-request="onLoadMore" class="house_btn yellow_btn" href="#">показать все</a></div>

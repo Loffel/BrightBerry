@@ -42,7 +42,7 @@ function onStart(){
         $prod->description = $product->description;
         
         $prod->category_id = ($cat->url != 'gosudarstvennye-obekty') ? (Category::where('title', $cat->name)->first())->id : 3;
-        $prod->description_short = '';
+        $prod->description_short = html_entity_decode(str_limit(strip_tags($product->description), 110));
         $prod->slug = $product->url;
         $prod->seo_title = $product->meta_title;
         $prod->seo_description = $product->meta_description;
@@ -52,6 +52,18 @@ function onStart(){
             $prod->save();
         }catch(Exception $e){
             dd($e, $prod);
+        }
+
+        if(!empty($product_images)){
+            $tempImage = new System\Models\File;
+
+            try{
+                $tempImage->fromUrl($baseURL.$product_images[0]->url);
+                
+                $prod->photo_thumb()->add($tempImage);
+            }catch(Exception $e){
+
+            }
         }
 
         foreach($product_images as $image){
