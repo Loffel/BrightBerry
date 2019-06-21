@@ -22,9 +22,9 @@ function onStart(){
     
     $this['isValid'] = true;
     
-    // Cache::forget('tags');
+    //Cache::forget('tags-'.$currentProduct->id);
 
-    $this['tags'] = Cache::remember('tags', 60, function() use ($currentProduct){
+    $this['tags'] = Cache::remember('tags-'.$currentProduct->id, 60, function() use ($currentProduct){
         $tagsArray = array();
         foreach($currentProduct->phototags as $tag) {
             if(!in_array($tag->title, $tagsArray))

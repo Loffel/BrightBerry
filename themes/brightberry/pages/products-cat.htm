@@ -36,8 +36,16 @@ function onLoadMore(){
     $products_html = "";
 
     foreach($products as $product){
+        $thumb_path = '';
+        $thumb_desc = '';
+
+        if(isset($product->photo_thumb)) {
+            $thumb_path = $product->photo_thumb->path;
+            $thumb_desc = $product->photo_thumb->description;
+        }
+
         $products_html .= '<a href="/works/'.$product->category->slug.'/'.$product->slug.'" class="house_item">
-            <div class="house_item_img"><img src="'.$product->photo_thumb->path.'" alt="'.$product->photo_thumb->description.'"></div>
+            <div class="house_item_img"><img src="'.$thumb_path.'" alt="'.$thumb_desc.'"></div>
             <p><span>'.$product->name.'</span></p>
             <div class="house_desc">
                 '.strip_tags($product->description_short).'
