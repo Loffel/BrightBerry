@@ -1,0 +1,67 @@
+description = "Home layout"
+==
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>October CMS - {{ this.page.title }}</title>
+        <meta name="description" content="{{ this.page.meta_description }}">
+        <meta name="title" content="{{ this.page.meta_title }}">
+        <meta name="author" content="OctoberCMS">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="OctoberCMS">
+        {% component 'SeoCmsPage' %}
+        <link rel="icon" type="image/png" href="{{ 'assets/images/october.png'|theme }}">
+        <link href="{{ 'assets/css/style.css'|theme }}" rel="stylesheet">
+        <link href="{{ 'assets/css/reveal.css'|theme }}" rel="stylesheet">
+        <link href="{{ 'assets/css/owl.carousel.css'|theme }}" rel="stylesheet">
+        <link href="{{ 'assets/css/responsive.css'|theme }}" rel="stylesheet">
+        {% styles %}
+    </head>
+    <body>
+
+        <!-- Header -->
+        {% if this.page.id == 'home' %}
+        <header>
+            {% partial 'site/header-home' %}
+        {% else %}
+        <header class="other_page">
+            {% partial 'site/header' %}
+        {% endif %}
+        </header>
+
+        {% if this.page.id != 'home' and this.page.id != 'product' and this.page.id != 'products-cat' and this.page.id != 'blog-post' %}
+            {% partial 'site/breadcrumbs' %}
+        {% endif %}
+        <!-- Content -->
+        {% page %}
+
+        <!-- Footer -->
+        <footer id="layout-footer">
+            {% partial 'site/footer' %}
+        </footer>
+
+        <!-- Scripts -->
+        <script src="{{ 'assets/js/jquery-1.11.3.min.js'|theme }}"></script>
+        <script src="{{ 'assets/js/jquery-migrate-1.2.1.min.js'|theme }}"></script>
+        <script src="{{ 'assets/js/jquery.reveal.js'|theme }}"></script>
+        <script src="{{ 'assets/js/owl.carousel.js'|theme }}"></script>
+
+        <script>
+            $(".menu_btn").click(function () {
+                $(this).toggleClass('menu_btn_active');
+                $(".menu").slideToggle();
+            });
+        </script>
+        <script>
+            if (jQuery(window).width() > 1025) {
+                $(".work_paginator a").click(function (event) {
+                    event.preventDefault();
+                });
+            }
+        </script>
+        {% framework extras %}
+        {% scripts %}
+
+    </body>
+</html>

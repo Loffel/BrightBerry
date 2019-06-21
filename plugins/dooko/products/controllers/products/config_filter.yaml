@@ -1,0 +1,6 @@
+scopes:
+  category:
+    label: Категория
+    modelClass: Dooko\Products\Models\Category
+    conditions: category_id in (:filtered)
+    nameFrom: title

@@ -1,0 +1,31 @@
+title = "О компании"
+url = "/about1"
+layout = "default"
+is_hidden = 1
+robot_index = "index"
+robot_follow = "follow"
+
+[genericForm contactForm]
+rules[name] = "required"
+rules[phone] = "required"
+rules_messages[name.required] = "Введите своё имя!"
+rules_messages[phone.required] = "Введите свой телефон!"
+messages_success = "С Вами свяжутся в ближайшее время!"
+messages_errors = "Ошибка отправки!"
+inline_errors = "disabled"
+sanitize_data = "disabled"
+anonymize_ip = "disabled"
+recaptcha_theme = "light"
+recaptcha_type = "image"
+recaptcha_size = "normal"
+==
+<section class="bottom_form">
+    <div class="container">
+        <h2>Обратная связь</h2>
+        {% component 'contactForm' %}
+    </div>
+    <video autoplay="" data-automation="VideoPlayer_video_video" loop="" muted="" playsinline="">
+        <source src="{{ 'assets/video/video.webm'|theme }}" type="video/webm">
+        <source src="{{ 'assets/video/video.mp4'|theme }}" type="video/mp4">
+    </video>
+</section>

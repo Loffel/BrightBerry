@@ -1,0 +1,10 @@
+name: Categories
+form: $/dooko/products/models/category/fields.yaml
+modelClass: Dooko\Products\Models\Category
+defaultRedirect: dooko/products/categories
+create:
+    redirect: 'dooko/products/categories/update/:id'
+    redirectClose: dooko/products/categories
+update:
+    redirect: dooko/products/categories
+    redirectClose: dooko/products/categories

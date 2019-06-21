@@ -1,0 +1,13 @@
+fields:
+    title:
+        label: Название
+        span: left
+        placeholder: 'Введите название категории'
+        type: text
+    slug:
+        label: Слаг
+        span: right
+        preset:
+            field: title
+            type: slug
+        type: text

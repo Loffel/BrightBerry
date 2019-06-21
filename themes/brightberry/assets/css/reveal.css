@@ -1,0 +1,51 @@
+/*	--------------------------------------------------
+	Reveal Modals
+	-------------------------------------------------- */
+		
+	.reveal-modal-bg {
+		position: fixed;
+		height: 100%;
+		width: 100%;
+		background: #000;
+		background: rgba(0, 0, 0, 0.75);
+		z-index: 9999;
+		display: none;
+		top: 0;
+		left: 0;
+		}
+	
+	.reveal-modal {
+		visibility: hidden;
+		top: 100px;
+		position: fixed;
+		z-index: 999999;
+		left: 0;
+		right: 0;
+		top: 50px;
+		bottom: 0;
+		margin: 0 auto;
+		width: 496px;
+		height: 596px;
+		border-radius: 20px;
+		background-color: #ffffff;
+		box-shadow: 0 2px 24px 0 rgba(22, 100, 135, 0.16);
+		padding:45px 25px;
+		}
+	#maps1.reveal-modal, #maps2.reveal-modal, #maps3.reveal-modal {
+		max-width: 650px;
+		}
+		
+	.reveal-modal.small 		{ width: 200px; margin-left: -140px;}
+	.reveal-modal.medium 		{ width: 400px; margin-left: -240px;}
+	.reveal-modal.large 		{ width: 600px; margin-left: -340px;}
+	.reveal-modal.xlarge 		{ width: 800px; margin-left: -440px;}
+	
+	.reveal-modal .close-reveal-modal {
+		    position: absolute;
+		    cursor: pointer;
+		    right: 24px;
+		    top: 24px;
+		    background: url(../images/close.png) no-repeat;
+		    width: 16px;
+		    height: 16px;
+		} 

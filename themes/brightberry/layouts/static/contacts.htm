@@ -1,0 +1,139 @@
+description = "Контакты"
+
+[staticPage]
+useContent = 0
+default = 0
+
+[genericForm contactForm]
+group = "Контакты"
+rules[name] = "required"
+rules[phone] = "required"
+rules_messages[name.required] = "Введите своё имя!"
+rules_messages[phone.required] = "Введите свой телефон!"
+messages_success = "С Вами свяжутся в ближайшее время!"
+messages_errors = "Ошибка отправки!"
+reset_form = 1
+inline_errors = "disabled"
+sanitize_data = "disabled"
+anonymize_ip = "disabled"
+recaptcha_theme = "light"
+recaptcha_type = "image"
+recaptcha_size = "normal"
+==
+{variable name="map_code" label="Код карты" tab="О компании" type="textarea"}{/variable}
+{repeater name="contacts" prompt="Добавить контакт" tab="Контакты"}
+    {variable name="title" label="Название" type="text" span="full"}{/variable}
+    {variable name="address" label="Адрес" type="text" span="full"}{/variable}
+    {variable name="phone" label="Телефон" type="text" span="full"}{/variable}
+    {variable name="email" label="Email" type="text" span="full"}{/variable}
+    {variable name="schedule" label="Время работы" type="textarea" span="full"}{/variable}
+{/repeater}
+{variable name="address" label="Адрес" type="text" span="full" tab="Artplay"}{/variable}
+{variable name="phone" label="Телефон" type="text" span="full" tab="Artplay"}{/variable}
+{variable name="email" label="Email" type="text" span="full" tab="Artplay"}{/variable}
+{variable name="schedule" label="Время работы" type="textarea" span="full" tab="Artplay"}{/variable}
+{variable name="map_code_artplay" label="Код карты" tab="Artplay" type="textarea"}{/variable}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>October CMS - {{ this.page.title }}</title>
+        <meta name="description" content="{{ this.page.meta_description }}">
+        <meta name="title" content="{{ this.page.meta_title }}">
+        <meta name="author" content="OctoberCMS">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="OctoberCMS">
+        <link rel="icon" type="image/png" href="{{ 'assets/images/october.png'|theme }}">
+        <link href="{{ 'assets/css/style.css'|theme }}" rel="stylesheet">
+        <link href="{{ 'assets/css/reveal.css'|theme }}" rel="stylesheet">
+        <link href="{{ 'assets/css/owl.carousel.css'|theme }}" rel="stylesheet">
+        <link href="{{ 'assets/css/responsive.css'|theme }}" rel="stylesheet">
+        {% styles %}
+    </head>
+    <body>
+
+        <header class="other_page">
+        <!-- Header -->
+        {% partial 'site/header' %}
+        </header>
+
+        {% partial 'site/breadcrumbs' %}
+        <!-- Content -->
+        
+        <div class="map">
+            {{ map_code|raw }}
+        </div>
+        <div class="contact">
+            {% for contact in contacts %}
+            <div class="contact_item">
+                <h3>{{ contact.title }}</h3>
+                <p>Адрес: {{ contact.address|raw }}</p>
+                <p>Телефон: {{ contact.phone }}</p>
+                <p>Email: {{ contact.email }}</p>
+                {% if contact.schedule != null and contact.schedule != '' %}
+                <p>График работы:<br>
+                    {{ contact.schedule|raw }}
+                </p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="artplay">
+            <div class="container">
+                <div class="artplay_container">
+                    <div class="artplay_left">
+                        <h3>ARTPLAY</h3>
+                        <p>Адрес: {{ address|raw }}
+                        </p>
+                        <p>Телефон:  {{ phone }}<br>
+                        Email: {{ email }}
+                        </p>
+                        <p>График работы:<br>
+                        {{ schedule|raw }}
+                        </p>
+                    </div>
+                    <div class="artplay_right">
+                        {{ map_code_artplay|raw }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="bottom_form">
+            <div class="container">
+                <h2>Обратная связь</h2>
+                {% component 'contactForm' %}
+            </div>
+            <video autoplay="" data-automation="VideoPlayer_video_video" loop="" muted="" playsinline="">
+                <source src="{{ 'assets/video/video.webm'|theme }}" type="video/webm">
+                <source src="{{ 'assets/video/video.mp4'|theme }}" type="video/mp4">
+            </video>
+        </section>
+        <!-- Footer -->
+        <footer id="layout-footer">
+            {% partial 'site/footer' %}
+        </footer>
+
+        <!-- Scripts -->
+        <script src="{{ 'assets/js/jquery-1.11.3.min.js'|theme }}"></script>
+        <script src="{{ 'assets/js/jquery-migrate-1.2.1.min.js'|theme }}"></script>
+        <script src="{{ 'assets/js/jquery.reveal.js'|theme }}"></script>
+        <script src="{{ 'assets/js/owl.carousel.js'|theme }}"></script>
+
+        <script>
+            $(".menu_btn").click(function () {
+                $(this).toggleClass('menu_btn_active');
+                $(".menu").slideToggle();
+            });
+        </script>
+        <script>
+            if (jQuery(window).width() > 1025) {
+                $(".work_paginator a").click(function (event) {
+                    event.preventDefault();
+                });
+            }
+        </script>
+        {% framework extras %}
+        {% scripts %}
+
+    </body>
+</html>

@@ -1,0 +1,392 @@
+description = "Главная страница"
+
+[staticPage]
+useContent = 0
+default = 0
+
+[builderList subcatsList]
+modelClass = "Dooko\Products\Models\Category"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "title"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+
+[genericForm contactForm]
+group = "Главная"
+rules[name] = "required"
+rules[phone] = "required"
+rules_messages[name.required] = "Введите своё имя!"
+rules_messages[phone.required] = "Введите свой телефон!"
+messages_success = "С Вами свяжутся в ближайшее время!"
+messages_errors = "Ошибка отправки!"
+reset_form = 1
+inline_errors = "disabled"
+sanitize_data = "disabled"
+anonymize_ip = "disabled"
+recaptcha_theme = "light"
+recaptcha_type = "image"
+recaptcha_size = "normal"
+==
+{repeater name="header_slider" prompt="Добавить слайд" tab="Слайдер в шапке"}
+    {variable name="photo" label="Фотография" type="mediafinder" mode="image" span="left"}{/variable}
+    {variable name="photo_alt" label="ALT фото" type="text" span="right"}{/variable}
+{/repeater}
+
+{variable name="about_text" label="О нас" tab="О нас" type="richeditor"}{/variable}
+{variable name="about_photo" tab="О нас" label="Фотография" type="mediafinder" mode="image" span="left"}{/variable}
+{variable name="about_photo_alt" label="ALT фото" tab="О нас" type="text" span="right"}{/variable}
+
+{variable name="portfolio_description" label="Описание" tab="Портфолио" type="text" span="full"}{/variable}
+{repeater name="portfolio_subcats" prompt="Добавить фото подкатегории" tab="Портфолио"}
+    {variable type="mediafinder" name="photo" label="Фотография" type="mediafinder" mode="image" span="left"}{/variable}
+    {variable name="photo_alt" label="ALT фото" type="text" span="right"}{/variable}
+{/repeater}
+
+{repeater name="how_we_works" prompt="Добавить шаг" tab="Как мы работаем"}
+    {variable name="title" label="Название" type="text" span="auto"}{/variable}
+    {variable name="description" label="Описание" type="richeditor" span="auto"}{/variable}
+    {variable name="photo" label="Фотография" type="mediafinder" mode="image" span="left"}{/variable}
+    {variable name="photo_alt" label="ALT фото" type="text" span="right"}{/variable}
+{/repeater}
+
+{variable name="nums_description" label="Описание" tab="BB в цифрах" type="textarea"}{/variable}
+{variable name="nums_left_1_text" label="Заголовок 1 (слева)" tab="BB в цифрах" type="text" span="left"}{/variable}
+{variable name="nums_left_1_desc" label="Подзаголовок 1 (слева)" tab="BB в цифрах" type="text" span="right"}{/variable}
+{variable name="nums_left_2_text" label="Заголовок 2 (слева)" tab="BB в цифрах" type="text" span="left"}{/variable}
+{variable name="nums_left_2_desc" label="Подзаголовок 2 (слева)" tab="BB в цифрах" type="text" span="right"}{/variable}
+{variable name="nums_left_3_desc" label="Подзаголовок 3 (слева)" tab="BB в цифрах" type="text" span="auto"}{/variable}
+{variable name="nums_left_4_desc" label="Подзаголовок 4 (слева)" tab="BB в цифрах" type="text" span="auto"}{/variable}
+{variable name="nums_right_1_text" label="Заголовок 1 (справа)" tab="BB в цифрах" type="text"}{/variable}
+{variable name="nums_right_1_desc" label="Подзаголовок 1 (справа)" tab="BB в цифрах" type="text"}{/variable}
+{variable name="nums_right_2_text" label="Заголовок 2 (справа)" tab="BB в цифрах" type="text"}{/variable}
+{variable name="nums_right_2_desc" label="Подзаголовок 2 (справа)" tab="BB в цифрах" type="text"}{/variable}
+{variable name="nums_right_3_text" label="Заголовок 3 (справа)" tab="BB в цифрах" type="text"}{/variable}
+{variable name="nums_right_3_desc" label="Подзаголовок 3 (справа)" tab="BB в цифрах" type="text"}{/variable}
+{variable name="nums_right_4_text" label="Заголовок 4 (справа)" tab="BB в цифрах" type="text"}{/variable}
+{variable name="nums_right_4_desc" label="Подзаголовок 4 (справа)" tab="BB в цифрах" type="text"}{/variable}
+
+{repeater name="partners" prompt="Добавить партнера" tab="Партнеры"}
+    {variable type="mediafinder" name="photo" label="Фотография" type="mediafinder" mode="image" span="left"}{/variable}
+    {variable name="photo_alt" label="ALT фото" type="text" span="right"}{/variable}
+{/repeater}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>October CMS - {{ this.page.title }}</title>
+        <meta name="description" content="{{ this.page.meta_description }}">
+        <meta name="title" content="{{ this.page.meta_title }}">
+        <meta name="author" content="OctoberCMS">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="OctoberCMS">
+        <link rel="icon" type="image/png" href="{{ 'assets/images/october.png'|theme }}">
+        <link href="{{ 'assets/css/style.css'|theme }}" rel="stylesheet">
+        <link href="{{ 'assets/css/reveal.css'|theme }}" rel="stylesheet">
+        <link href="{{ 'assets/css/owl.carousel.css'|theme }}" rel="stylesheet">
+        <link href="{{ 'assets/css/responsive.css'|theme }}" rel="stylesheet">
+        {% styles %}
+    </head>
+    <body>
+
+        <header>
+        <!-- Header -->
+        <div class="container">
+            <div class="head_container">
+                <div class="menu_btn home_btn">Меню <span></span></div>
+                {% partial 'site/menu-header' %}
+                <div class="head_social">
+                    <a href="#"><img src="{{ 'assets/images/soc1.png'|theme }}" alt=""></a>
+                    <a href="#"><img src="{{ 'assets/images/soc2.png'|theme }}" alt=""></a>
+                    <a href="#"><img src="{{ 'assets/images/soc3.png'|theme }}" alt=""></a>
+                </div>
+                <div class="logo"><img src="{{ 'assets/images/logo.png'|theme }}" alt=""></div>
+                <div class="city">СДЕЛАНО В САНКТ-ПЕТЕРБУРГЕ</div>
+                <div class="mouse"><img src="{{ 'assets/images/mouse.png'|theme }}" alt=""></div>
+            </div>
+            </div>
+
+            <ul id="slides">
+                {% for slide in header_slider %}
+                <div class="head_bg {{ loop.index == 1 ? 'showing':''}}"><img src="{{ slide.photo|media }}" alt="{{ slide.photo_alt }}"></div>
+                {% endfor %}
+            </ul>
+        </header>
+
+        <!-- Content -->
+        <section class="about">
+            <div class="container">
+                <div class="about_container">
+                    <div class="about_h2">
+                        <h2>О НАС</h2>
+                    </div>
+                    <div class="about_text">
+                        {{ about_text|raw }}
+                    </div>
+                    <div class="about_img">
+                        <img src="{{ about_photo|media }}" alt="{{ about_photo_alt }}">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="portfolio">
+            <div class="container">
+                <h2>Портфолио</h2>
+                <p class=pre_text>
+                    {{ portfolio_description|raw }}
+                </p>
+                <div class="portfolio_container">
+                    <a href="/works/doma" class="portfolio_item">
+                        <div class="portfolio_item_img">
+                            <img src="{{ 'assets/images/p1.jpg'|theme }}" alt="">
+                        </div>
+                        <p><span>Дома</span></p>
+
+                        <img class="portfolio_logo" src="{{ 'assets/images/logo.png'|theme }}" alt="">
+
+                    </a>
+                    <a href="/works/kvartiry" class="portfolio_item">
+                        <div class="portfolio_item_img">
+                            <img src="{{ 'assets/images/p2.jpg'|theme }}" alt="">
+                        </div>
+                        <p><span>КВАРТИРЫ</span></p>
+                        <img class="portfolio_logo" src="{{ 'assets/images/logo.png'|theme }}" alt="">
+                    </a>
+                    <a href="/works/obekty-biznesa" class="portfolio_item">
+                        <div class="portfolio_item_img">
+                            <img src="{{ 'assets/images/p3.jpg'|theme }}" alt="">
+                        </div>
+                        <p><span>ОБЪЕКТЫ БИЗНЕСА</span></p>
+                        <img class="portfolio_logo" src="{{ 'assets/images/logo.png'|theme }}" alt="">
+                    </a>
+                </div>
+                <div class="portfolio_slider">
+                    {% for subcat in subcatsList.records %}
+                        {% if loop.index > 3 %}
+                    <a href="/works/{{ subcat.slug }}" class="portfolio_slider_item">
+                        <p><span>{{ subcat.title }}</span></p>
+                        <div class="portfolio_slider_img">
+                            <img src="{{ portfolio_subcats[loop.index - 4].photo|media }}" alt="{{ portfolio_subcats[loop.index - 4].photo_alt }}">
+                        </div>
+                    </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <section class="work">
+            <div class="container">
+                <h2>КАК МЫ РАБОТАЕМ?</h2>
+                <ul class="work_paginator">
+                    {% for step in how_we_works %}
+                    <a href="#id" class="active" data="0{{ loop.index }}">{{ step.title|raw }}<span>{{ loop.index }}</span></a>
+                    {% endfor %}
+                </ul>
+                <div class="work_container" id="id">
+                    {% for step in how_we_works %}
+                    <div class="work_item" data-hash="0{{ loop.index }}">
+                        <div class="work_text">
+                            <h3>{{ html_strip(step.title) }}</h3>
+                            {{ step.description|raw }}
+                        </div>
+                        <div class="work_img">
+                            <img src="{{ step.photo|media }}" alt="{{ step.photo_alt }}">
+                            <span>Договор</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <section class="cyfre">
+            <div class="container">
+                <h2>BRIGHTBERRY В цифрах </h2>
+                <p class="pre_text">{{ nums_description }}</p>
+
+                <div class="cyfre_container">
+                    <div class="cyfre_left">
+                        <div class="cyfre_items ">
+                            <p>{{nums_left_1_text}}</p>
+                            <span>{{nums_left_1_desc|raw}}</span>
+                        </div>
+                        <div class="cyfre_items ">
+                            <p>{{nums_left_2_text}}</p>
+                            <span>{{nums_left_2_desc|raw}}</span>
+                        </div>
+                        <div class="cyfre_items ">
+                            <p> <img src="{{ 'assets/images/cyfre1.png'|theme }}" alt=""></p>
+                            <span>{{nums_left_3_desc|raw}}</span>
+                        </div>
+                        <div class="cyfre_items ">
+                            <p> <img src="{{ 'assets/images/cyfre2.png'|theme }}" alt=""></p>
+                            <span>{{nums_left_4_desc|raw}}</span>
+                        </div>
+                    </div>
+                    <div class="cyfre_right">
+                        <div class="cyfre_items cyfre_items1">
+                            <p>{{ nums_right_1_text }}</p>
+                            <span>{{nums_right_1_desc|raw}}</span>
+                        </div>
+                        <div class="cyfre_items cyfre_items2">
+                            <p>{{ nums_right_2_text }}</p>
+                            <span>{{nums_right_2_desc|raw}}</span>
+                        </div>
+                        <div class="cyfre_items cyfre_items3">
+                            <p>{{ nums_right_3_text }}</p>
+                            <span>{{nums_right_3_desc|raw}}</span>
+                        </div>
+
+                        <div class="cyfre_items cyfre_items4">
+                            <p>{{ nums_right_4_text }}</p>
+                            <span>{{nums_right_4_desc|raw}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="partners">
+            <div class="container">
+                <h2>Партнеры</h2>
+                <div class="partners_container">
+                    {% for partner in partners %}
+                    <div class="partners_item">
+                        <img src="{{ partner.photo|media }}" alt="{{ partner.photo_alt }}">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <section class="bottom_form">
+            <div class="container">
+                <h2>Обратная связь</h2>
+                {% component 'contactForm' %}
+            </div>
+            <video autoplay="" data-automation="VideoPlayer_video_video" loop="" muted="" playsinline="">
+                <source src="{{ 'assets/video/video.webm'|theme }}" type="video/webm">
+                <source src="{{ 'assets/video/video.mp4'|theme }}" type="video/mp4">
+            </video>
+        </section>
+
+        <!-- Footer -->
+        <footer id="layout-footer">
+            {% partial 'site/footer' %}
+        </footer>
+
+        <!-- Scripts -->
+        <script src="{{ 'assets/js/jquery-1.11.3.min.js'|theme }}"></script>
+        <script src="{{ 'assets/js/jquery-migrate-1.2.1.min.js'|theme }}"></script>
+        <script src="{{ 'assets/js/jquery.reveal.js'|theme }}"></script>
+        <script src="{{ 'assets/js/owl.carousel.js'|theme }}"></script>
+
+        <script>
+            $(".menu_btn").click(function () {
+                $(this).toggleClass('menu_btn_active');
+                $(".menu").slideToggle();
+            });
+        </script>
+        <script>
+            if (jQuery(window).width() > 1025) {
+                $(".work_paginator a").click(function (event) {
+                    event.preventDefault();
+                });
+            }
+        </script>
+        {% framework extras %}
+        {% scripts %}
+
+        <script>
+            var slides = document.querySelectorAll('#slides .head_bg');
+            var currentSlide = 0;
+            var slideInterval = setInterval(nextSlide, 5000);
+
+            function nextSlide() {
+                slides[currentSlide].className = 'head_bg';
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].className = 'head_bg showing';
+            }
+        </script>
+
+        <script>
+            $('.portfolio_slider').owlCarousel({
+                loop: true,
+                nav: true,
+                items: 4,
+                margin: 30,
+                responsive: {
+                    0: {
+                        items: 1,
+                    },
+                    550: {
+                        items: 2,
+                    },
+                    1025: {
+                        items: 4,
+                    }
+
+                }
+            })
+        </script>
+
+        <script>
+            var action = false,
+                clicked = false;
+            var Owl = {
+
+                init: function () {
+                    Owl.carousel();
+                },
+
+                carousel: function () {
+                    var owl;
+                    $(document).ready(function () {
+
+                        owl = $('.work_container').owlCarousel({
+                            items: 1,
+                            center: false,
+                            margin: 0,
+                            nav: false,
+                            dots: true,
+                            mouseDrag: false,
+                            autoplay: true,
+                            autoplayTimeout: 3000,
+                            autoplayHoverPause: true,
+                            loop: false,
+                            dotsContainer: '.work_paginator',
+
+                            navText: ['prev', 'next']
+
+
+                        });
+
+                        $('.owl-next').on('click', function () {
+                            action = 'next';
+                        });
+
+                        $('.owl-prev').on('click', function () {
+                            action = 'prev';
+                        });
+
+                        $('.work_paginator').on('click', 'a', function (e) {
+                            owl.trigger('to.owl.carousel', [$(this).index(), 300]);
+                        });
+                    });
+                }
+            };
+
+            $(document).ready(function () {
+                Owl.init();
+            });
+        </script>
+
+        <script>
+            $('.product_portfolio_slider').owlCarousel({
+                loop: true,
+                nav: true,
+                items: 1,
+                navText: ['назад', 'вперед']
+            });
+        </script>
+    </body>
+</html>

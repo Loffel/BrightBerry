@@ -1,0 +1,61 @@
+title = "import_blog"
+url = "/import_blog"
+is_hidden = 1
+robot_index = "index"
+robot_follow = "follow"
+==
+<?php
+use Rainlab\Blog\Models\Post;
+use Carbon\Carbon;
+
+function onStart(){
+    $baseURL = 'http://brightberry.ru/download/images';
+
+    $articles = Db::table('articles')->where('parent_id', 3)->get();
+
+    foreach($articles as $article){ 
+        $article_images = Db::table('images')->where('object_type', 'articles')->where('object_id', $article->id)->get();
+        
+        $post = new Post;
+
+        if(empty($article->url)) $article->url = str_slug($article->name, '-');
+        $isExists = Post::where('slug', $article->url)->first();
+
+        $post->title = html_entity_decode($article->name);
+
+        if($isExists !== NULL)
+            $post->slug = str_finish($article->url, '-2');
+        else $post->slug = $article->url;
+
+        $post->excerpt = html_entity_decode(str_limit(strip_tags($article->description), 110));
+        $post->content = $article->description;
+        $post->content_html = $article->description;
+        $post->published = 1;
+        $post->published_at = Carbon::parse($article->date);
+        $post->user_id = 1;
+        $post->seo_title = $article->meta_title;
+        $post->seo_description = $article->meta_description;
+        $post->seo_keywords = $article->meta_keywords;
+
+        try{
+            $post->save();
+        }catch(Exception $e){
+            dd($e, $post);
+        }
+
+        Db::table('rainlab_blog_posts_categories')->insert(['post_id' => $post->id, 'category_id' => 2]);
+
+        foreach($article_images as $image){
+            if(str_contains($image->caption, "youtube")) continue;
+            $tempImage = new System\Models\File;
+            $tempImage->fromUrl($baseURL.$image->url);
+
+
+            $post->featured_images()->add($tempImage);
+        }
+    }
+
+    dd('Done!');
+}
+?>
+==

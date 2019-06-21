@@ -1,0 +1,44 @@
+title = "Пост"
+url = "/blog/:slug"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[blogPost]
+slug = "{{ :slug }}"
+categoryPage = "blog/category"
+==
+<?php
+function onEnd()
+{
+    if (isset($this['post']))
+        $this->page->title = $this->post->title;
+}
+?>
+==
+{% if post %}
+    {% partial 'site/breadcrumbs' product_name=post.title %}
+    <div class="product_portfolio">
+        <div class="container">
+            <h2>{{ post.title }}</h2>
+            {{ post.content_html|raw }}
+            
+            {% if post.featured_images.count %}
+            <div class="product_blocks">
+                {% for image in post.featured_images %}
+                <div class="product_block">
+                    <img src="{{ image.path }}" alt="{{ image.description }}">
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% else %}
+    <div class="product_portfolio">
+        <div class="container">
+            <h2>Пост не найден!</h2>
+        </div>
+    </div>
+{% endif %}

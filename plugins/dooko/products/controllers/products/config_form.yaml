@@ -1,0 +1,10 @@
+name: Products
+form: $/dooko/products/models/product/fields.yaml
+modelClass: Dooko\Products\Models\Product
+defaultRedirect: dooko/products/products
+create:
+    redirect: 'dooko/products/products/update/:id'
+    redirectClose: dooko/products/products
+update:
+    redirect: dooko/products/products
+    redirectClose: dooko/products/products

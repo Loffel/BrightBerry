@@ -1,0 +1,129 @@
+title = "Работы"
+url = "/works"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[builderList subcatsList]
+modelClass = "Dooko\Products\Models\Category"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "title"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+==
+<section class="portfolio">
+    <div class="container">
+        <h2>Портфолио</h2>
+        <p class=pre_text>
+            {{ portfolio_description|raw }}
+        </p>
+        <div class="portfolio_container">
+            <a href="/works/doma" class="portfolio_item">
+                <div class="portfolio_item_img">
+                    <img src="{{ 'assets/images/p1.jpg'|theme }}" alt="">
+                </div>
+                <p><span>Дома</span></p>
+
+                <img class="portfolio_logo" src="{{ 'assets/images/logo.png'|theme }}" alt="">
+
+            </a>
+            <a href="/works/kvartiry" class="portfolio_item">
+                <div class="portfolio_item_img">
+                    <img src="{{ 'assets/images/p2.jpg'|theme }}" alt="">
+                </div>
+                <p><span>КВАРТИРЫ</span></p>
+                <img class="portfolio_logo" src="{{ 'assets/images/logo.png'|theme }}" alt="">
+            </a>
+            <a href="/works/obekty-biznesa" class="portfolio_item">
+                <div class="portfolio_item_img">
+                    <img src="{{ 'assets/images/p3.jpg'|theme }}" alt="">
+                </div>
+                <p><span>ОБЪЕКТЫ БИЗНЕСА</span></p>
+                <img class="portfolio_logo" src="{{ 'assets/images/logo.png'|theme }}" alt="">
+            </a>
+        </div>
+        <div class="portfolio_slider">
+            <a href="/works/elitnye-kuhni" class="portfolio_slider_item">
+                <p><span>Элитные кухни</span></p>
+                <div class="portfolio_slider_img">
+                    <img src="/storage/app/media/ps3.jpg" alt="Элитные кухни">
+                </div>
+            </a>
+            <a href="/works/mebel-iz-dereva" class="portfolio_slider_item">
+                <p><span>Мебель из дерева</span></p>
+                <div class="portfolio_slider_img">
+                    <img src="/storage/app/media/ps4.jpg" alt="Мебель из дерева">
+                </div>
+            </a>
+            <a href="/works/dveri-iz-massiva" class="portfolio_slider_item">
+                <p><span>Двери из массива</span></p>
+                <div class="portfolio_slider_img">
+                    <img src="/storage/app/media/ps1.jpg" alt="Двери из массива">
+                </div>
+            </a>
+            <a href="/works/lestnicy" class="portfolio_slider_item">
+                <p><span>Лестницы</span></p>
+                <div class="portfolio_slider_img">
+                    <img src="/storage/app/media/ps2.jpg" alt="Лестницы">
+                </div>
+            </a>
+            <a href="/works/oformlenie-pomeshchenij" class="portfolio_slider_item">
+                <p><span>Оформление помещений</span></p>
+                <div class="portfolio_slider_img">
+                    <img src="/storage/app/media/5-4_.jpg" alt="Оформление помещений">
+                </div>
+            </a>
+            <a href="/works/elementy-interera" class="portfolio_slider_item">
+                <p><span>Элементы интерьера</span></p>
+                <div class="portfolio_slider_img">
+                    <img src="/storage/app/media/3-310.jpg" alt="Элементы интерьера">
+                </div>
+            </a>
+            <a href="/works/sleb-dereva" class="portfolio_slider_item">
+                <p><span>Слэб дерева</span></p>
+                <div class="portfolio_slider_img">
+                    <img src="/storage/app/media/1-315.jpg" alt="Слэб дерева">
+                </div>
+            </a>
+            <a href="/works/hudozhestvennaya-kovka" class="portfolio_slider_item">
+                <p><span>Художественная ковка</span></p>
+                <div class="portfolio_slider_img">
+                    <img src="/storage/app/media/3-410.jpg" alt="Художественная ковка">
+                </div>
+            </a>
+            <a href="/works/steklo" class="portfolio_slider_item">
+                <p><span>Стекло</span></p>
+                <div class="portfolio_slider_img">
+                    <img src="/storage/app/media/1-47.jpg" alt="Стекло">
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+{% put scripts %}
+<script>
+    $('.portfolio_slider').owlCarousel({
+        loop: true,
+        nav: true,
+        items: 4,
+        margin: 30,
+        responsive: {
+            0: {
+                items: 1,
+            },
+            550: {
+                items: 2,
+            },
+            1025: {
+                items: 4,
+            }
+
+        }
+    })
+</script>
+{% endput %}

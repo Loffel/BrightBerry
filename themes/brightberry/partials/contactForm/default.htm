@@ -1,0 +1,18 @@
+[viewBag]
+snippetCode = "contact-us"
+snippetName = "Обратная связь"
+==
+<div id="{{ __SELF__ }}_forms_flash"></div>
+<form data-request="{{ __SELF__ }}::onFormSubmit">
+
+    {{ form_token() }}
+
+    <div class="form_left">
+        <textarea name="message" placeholder="Сообщение"></textarea>
+    </div>
+    <div class="form_right">
+        <input type="text" value="" name="name" placeholder="Ваше имя" required>
+        <input type="text" value="" name="phone" placeholder="Ваш телефон" required>
+        <button id="simpleContactSubmitButton" type="submit">Отправить</button>
+    </div>
+</form>

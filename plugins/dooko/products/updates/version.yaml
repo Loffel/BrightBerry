@@ -1,0 +1,44 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table dooko_products_'
+    - builder_table_create_dooko_products_.php
+1.0.3:
+    - 'Updated table dooko_products_'
+    - builder_table_update_dooko_products_.php
+1.0.4:
+    - 'Updated table dooko_products_'
+    - builder_table_update_dooko_products__2.php
+1.0.5:
+    - 'Created table dooko_products_objects'
+    - builder_table_create_dooko_products_objects.php
+1.0.6:
+    - 'Created table dooko_products_categories'
+    - builder_table_create_dooko_products_categories.php
+1.0.7:
+    - 'Created table dooko_products_prods_cats'
+    - builder_table_create_dooko_products_prods_cats.php
+1.0.8:
+    - 'Drop table dooko_products_products_categories'
+    - builder_table_delete_dooko_products_products_categories.php
+1.0.9:
+    - 'Drop table dooko_products_prods_cats'
+    - builder_table_delete_dooko_products_prods_cats.php
+1.0.10:
+    - 'Updated table dooko_products_'
+    - builder_table_update_dooko_products__3.php
+1.0.11:
+    - 'Updated table dooko_products_'
+    - builder_table_update_dooko_products__4.php
+1.0.12:
+    - 'Updated table dooko_products_'
+    - builder_table_update_dooko_products__5.php
+1.0.13:
+    - 'Updated table dooko_products_'
+    - builder_table_update_dooko_products__6.php
+1.0.14:
+    - 'Updated table dooko_products_'
+    - builder_table_update_dooko_products__7.php
+1.0.15:
+    - 'Created table dooko_products_prods_tags'
+    - builder_table_create_dooko_products_prods_tags.php

@@ -1,0 +1,428 @@
+title = "Главная страница"
+url = "/home1"
+layout = "default"
+is_hidden = 1
+robot_index = "index"
+robot_follow = "follow"
+
+[genericForm contactForm]
+rules[name] = "required"
+rules[phone] = "required"
+rules_messages[name.required] = "Введите своё имя!"
+rules_messages[phone.required] = "Введите свой телефон!"
+messages_success = "С Вами свяжутся в ближайшее время!"
+messages_errors = "Ошибка отправки!"
+inline_errors = "disabled"
+sanitize_data = "disabled"
+anonymize_ip = "disabled"
+recaptcha_theme = "light"
+recaptcha_type = "image"
+recaptcha_size = "normal"
+==
+<section class="about">
+    <div class="container">
+        <div class="about_container">
+            <div class="about_h2">
+                <h2>О НАС</h2>
+            </div>
+            <div class="about_text">
+                <p>Практика показала, что для реализации нестандартных эксклюзивных проектных идей необходимо создать и
+                    «воспитать» команду специалистов в разных областях для эффективной совместной работы. В результате
+                    образовались команды мастеров по обработке дерева и металла, мощнейший технолого-конструкторский
+                    отдел, дипломированный проектно-коммерческий отдел и установщики «от бога».</p>
+                <p>Так же сформировалась группа краснодеревщиков, в основном выпускников СПбГЛТУ им. С. М. Кирова,
+                    которые в настоящее время решают любые поставленные задачи по реализации объектов из дерева.</p>
+                <p>Сегодня наш потенциал позволит вам реализовать любые эксклюзивные проекты.</p>
+            </div>
+            <div class="about_img">
+                <img src="{{ 'assets/images/about.jpg'|theme }}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="portfolio">
+    <div class="container">
+        <h2>Портфолио</h2>
+        <p class="pre_text">Неважно, требуется вам мебель для частного дома или двери для квартиры — обратившись к нам,
+            уже остаетесь в выигрыше, так как сможете получить не только продукт высочайшего качества, а еще и сервисную
+            поддержку в течении многих лет.</p>
+        <div class="portfolio_container">
+            <a href="#" class="portfolio_item">
+                <div class="portfolio_item_img">
+                    <img src="{{ 'assets/images/p1.jpg'|theme }}" alt="">
+                </div>
+                <p><span>Дома</span></p>
+
+                <img class="portfolio_logo" src="{{ 'assets/images/logo.png'|theme }}" alt="">
+
+            </a>
+            <a href="#" class="portfolio_item">
+                <div class="portfolio_item_img">
+                    <img src="{{ 'assets/images/p2.jpg'|theme }}" alt="">
+                </div>
+                <p><span>КВАРТИРЫ</span></p>
+                <img class="portfolio_logo" src="{{ 'assets/images/logo.png'|theme }}" alt="">
+            </a>
+            <a href="#" class="portfolio_item">
+                <div class="portfolio_item_img">
+                    <img src="{{ 'assets/images/p3.jpg'|theme }}" alt="">
+                </div>
+                <p><span>ОБЪЕКТЫ БИЗНЕСА</span></p>
+                <img class="portfolio_logo" src="{{ 'assets/images/logo.png'|theme }}" alt="">
+            </a>
+        </div>
+        <div class="portfolio_slider">
+            <a href="#" class="portfolio_slider_item">
+                <p><span>Двери из массива</span></p>
+                <div class="portfolio_slider_img">
+                    <img src="{{ 'assets/images/ps1.jpg'|theme }}" alt="">
+                </div>
+            </a>
+            <a href="#" class="portfolio_slider_item">
+                <p><span>Лестницы</span></p>
+                <div class="portfolio_slider_img">
+                    <img src="{{ 'assets/images/ps2.jpg'|theme }}" alt="">
+                </div>
+            </a>
+            <a href="#" class="portfolio_slider_item">
+                <p><span>Элитные кухни</span></p>
+                <div class="portfolio_slider_img">
+                    <img src="{{ 'assets/images/ps3.jpg'|theme }}" alt="">
+                </div>
+            </a>
+            <a href="#" class="portfolio_slider_item">
+                <p><span>Мебель из дерева</span></p>
+                <div class="portfolio_slider_img">
+                    <img src="{{ 'assets/images/ps4.jpg'|theme }}" alt="">
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+<section class="work">
+    <div class="container">
+        <h2>КАК МЫ РАБОТАЕМ?</h2>
+        <ul class="work_paginator">
+            <a href="#id" class="active" data="01">Расчет<br>
+                стоимости
+                <span>1</span>
+            </a>
+            <a href="#id" class="active" data="02">Планировочное<br>
+                решение
+                <span>2</span>
+            </a>
+            <a href="#id" class="active" data="03">Визуализация<span>3</span></a>
+            <a href="#id" class="active" data="04">Разработка<br>
+                чертежей<span>4</span>
+            </a>
+            <a href="#id" class="active" data="05">Производство<span>5</span></a>
+            <a href="#id" class="active" data="06">Установка<span>6</span></a>
+        </ul>
+        <div class="work_container" id="id">
+            <div class="work_item" data-hash="01">
+                <div class="work_text">
+                    <h3>Расчет
+                        стоимости
+                    </h3>
+                    <p>Практика показала, что для реализации нестандартных эксклюзивных проектных идей необходимо
+                        создать и «воспитать» команду специалистов в разных областях для эффективной совместной работы.
+                        В результате образовались команды мастеров по обработке дерева и металла, мощнейший
+                        технолого-конструкторский отдел, дипломированный проектно-коммерческий отдел и установщики «от
+                        бога».</p>
+                    <p>Так же сформировалась группа краснодеревщиков, в основном выпускников СПбГЛТУ им. С. М. Кирова,
+                        которые в настоящее время решают любые поставленные задачи по реализации объектов из дерева.</p>
+                    <p>Сегодня наш потенциал позволит вам реализовать любые эксклюзивные проекты.</p>
+                </div>
+                <div class="work_img">
+                    <img src="{{ 'assets/images/w1.jpg'|theme }}" alt="">
+                    <span>Договор</span>
+                </div>
+            </div>
+            <div class="work_item" data-hash="02">
+                <div class="work_text">
+                    <h3>Планировочное решение</h3>
+                    <p>Практика показала, что для реализации нестандартных эксклюзивных проектных идей необходимо
+                        создать и «воспитать» команду специалистов в разных областях для эффективной совместной работы.
+                        В результате образовались команды мастеров по обработке дерева и металла, мощнейший
+                        технолого-конструкторский отдел, дипломированный проектно-коммерческий отдел и установщики «от
+                        бога».</p>
+                    <p>Так же сформировалась группа краснодеревщиков, в основном выпускников СПбГЛТУ им. С. М. Кирова,
+                        которые в настоящее время решают любые поставленные задачи по реализации объектов из дерева.</p>
+                    <p>Сегодня наш потенциал позволит вам реализовать любые эксклюзивные проекты.</p>
+                </div>
+                <div class="work_img">
+                    <img src="{{ 'assets/images/w1.jpg'|theme }}" alt="">
+                    <span>Договор</span>
+                </div>
+            </div>
+            <div class="work_item" data-hash="03">
+                <div class="work_text">
+                    <h3>Визуализация</h3>
+                    <p>Практика показала, что для реализации нестандартных эксклюзивных проектных идей необходимо
+                        создать и «воспитать» команду специалистов в разных областях для эффективной совместной работы.
+                        В результате образовались команды мастеров по обработке дерева и металла, мощнейший
+                        технолого-конструкторский отдел, дипломированный проектно-коммерческий отдел и установщики «от
+                        бога».</p>
+                    <p>Так же сформировалась группа краснодеревщиков, в основном выпускников СПбГЛТУ им. С. М. Кирова,
+                        которые в настоящее время решают любые поставленные задачи по реализации объектов из дерева.</p>
+                    <p>Сегодня наш потенциал позволит вам реализовать любые эксклюзивные проекты.</p>
+                </div>
+                <div class="work_img">
+                    <img src="{{ 'assets/images/w1.jpg'|theme }}" alt="">
+                    <span>Договор</span>
+                </div>
+            </div>
+            <div class="work_item" data-hash="04">
+                <div class="work_text">
+                    <h3>Разработка
+                        чертежей
+                    </h3>
+                    <p>Практика показала, что для реализации нестандартных эксклюзивных проектных идей необходимо
+                        создать и «воспитать» команду специалистов в разных областях для эффективной совместной работы.
+                        В результате образовались команды мастеров по обработке дерева и металла, мощнейший
+                        технолого-конструкторский отдел, дипломированный проектно-коммерческий отдел и установщики «от
+                        бога».</p>
+                    <p>Так же сформировалась группа краснодеревщиков, в основном выпускников СПбГЛТУ им. С. М. Кирова,
+                        которые в настоящее время решают любые поставленные задачи по реализации объектов из дерева.</p>
+                    <p>Сегодня наш потенциал позволит вам реализовать любые эксклюзивные проекты.</p>
+                </div>
+                <div class="work_img">
+                    <img src="{{ 'assets/images/w1.jpg'|theme }}" alt="">
+                    <span>Договор</span>
+                </div>
+            </div>
+            <div class="work_item" data-hash="05">
+                <div class="work_text">
+                    <h3>Производство</h3>
+                    <p>Практика показала, что для реализации нестандартных эксклюзивных проектных идей необходимо
+                        создать и «воспитать» команду специалистов в разных областях для эффективной совместной работы.
+                        В результате образовались команды мастеров по обработке дерева и металла, мощнейший
+                        технолого-конструкторский отдел, дипломированный проектно-коммерческий отдел и установщики «от
+                        бога».</p>
+                    <p>Так же сформировалась группа краснодеревщиков, в основном выпускников СПбГЛТУ им. С. М. Кирова,
+                        которые в настоящее время решают любые поставленные задачи по реализации объектов из дерева.</p>
+                    <p>Сегодня наш потенциал позволит вам реализовать любые эксклюзивные проекты.</p>
+                </div>
+                <div class="work_img">
+                    <img src="{{ 'assets/images/w1.jpg'|theme }}" alt="">
+                    <span>Договор</span>
+                </div>
+            </div>
+            <div class="work_item" data-hash="06">
+                <div class="work_text">
+                    <h3>Установка</h3>
+                    <p>Практика показала, что для реализации нестандартных эксклюзивных проектных идей необходимо
+                        создать и «воспитать» команду специалистов в разных областях для эффективной совместной работы.
+                        В результате образовались команды мастеров по обработке дерева и металла, мощнейший
+                        технолого-конструкторский отдел, дипломированный проектно-коммерческий отдел и установщики «от
+                        бога».</p>
+                    <p>Так же сформировалась группа краснодеревщиков, в основном выпускников СПбГЛТУ им. С. М. Кирова,
+                        которые в настоящее время решают любые поставленные задачи по реализации объектов из дерева.</p>
+                    <p>Сегодня наш потенциал позволит вам реализовать любые эксклюзивные проекты.</p>
+                </div>
+                <div class="work_img">
+                    <img src="{{ 'assets/images/w1.jpg'|theme }}" alt="">
+                    <span>Договор</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="cyfre">
+    <div class="container">
+        <h2>BRIGHTBERRY В цифрах </h2>
+        <p class="pre_text">Глядя на проделанную работу и общаясь каждый день с нашими клиентами, понимаешь, что дарить
+            людям счастье не так уж и сложно. Важно выполнять свою работу качественно и найти индивидуальный подход к
+            клиенту. Индивидуальное производство дарит людям счастье, ведь оно состоит в умении быть собой и обрести
+            свой стиль. Вместе с вами мы создаем качественный продукт, следуя философии и стандартам BRIGHTBERRY. Но эту
+            философию мы создаем вместе с вами!</p>
+
+        <div class="cyfre_container">
+            <div class="cyfre_left">
+                <div class="cyfre_items ">
+                    <p>5780</p>
+                    <span><small>изделий</small> установлено</span>
+                </div>
+
+                <div class="cyfre_items ">
+                    <p>69</p>
+                    <span><small>проектов</small> в год</span>
+                </div>
+
+                <div class="cyfre_items ">
+                    <p> <img src="{{ 'assets/images/cyfre1.png'|theme }}" alt=""></p>
+                    <span>
+                        <small>Каждый третий</small> новый <br>
+                        клиент приходит</span>
+                </div>
+
+                <div class="cyfre_items ">
+                    <p> <img src="{{ 'assets/images/cyfre2.png'|theme }}" alt=""></p>
+                    <span>
+                        <small>Каждый второй</small> наш клиент всегда<br> делает повторный заказ, когда<br> принимает
+                        готовое изделие</span>
+                </div>
+
+
+            </div>
+            <div class="cyfre_right">
+                <div class="cyfre_items cyfre_items1">
+                    <p>25%</p>
+                    <span>Заказов составляют <small>двери</small> </span>
+                </div>
+                <div class="cyfre_items cyfre_items2">
+                    <p>32%</p>
+                    <span>Заказов составляют <small>кухни</small></span>
+                </div>
+                <div class="cyfre_items cyfre_items3">
+                    <p>36%</p>
+                    <span>Заказов приходится на<br> <small class="cyfre_green">квартиры</small><br> и
+                        <br><small>пентхаусы</small></span>
+                </div>
+                <div class="cyfre_items cyfre_items4">
+                    <p>68%</p>
+                    <span>Заказов приходится<br>
+                        на<br> <small class="cyfre_green">частные<br> дома </small><br>
+                        и<br> <small>резиденции</small>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="partners">
+    <div class="container">
+        <h2>Партнеры</h2>
+        <div class="partners_container">
+            <div class="partners_item">
+                <img src="{{ 'assets/images/part.png'|theme }}" alt="">
+            </div>
+            <div class="partners_item">
+                <img src="{{ 'assets/images/part.png'|theme }}" alt="">
+            </div>
+            <div class="partners_item">
+                <img src="{{ 'assets/images/part.png'|theme }}" alt="">
+            </div>
+            <div class="partners_item">
+                <img src="{{ 'assets/images/part.png'|theme }}" alt="">
+            </div>
+            <div class="partners_item">
+                <img src="{{ 'assets/images/part.png'|theme }}" alt="">
+            </div>
+            <div class="partners_item">
+                <img src="{{ 'assets/images/part.png'|theme }}" alt="">
+            </div>
+            <div class="partners_item">
+                <img src="{{ 'assets/images/part.png'|theme }}" alt="">
+            </div>
+            <div class="partners_item">
+                <img src="{{ 'assets/images/part.png'|theme }}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="bottom_form">
+    <div class="container">
+        <h2>Обратная связь</h2>
+        {% component 'contactForm' %}
+    </div>
+    <video autoplay="" data-automation="VideoPlayer_video_video" loop="" muted="" playsinline="">
+        <source src="{{ 'assets/video/video.webm'|theme }}" type="video/webm">
+        <source src="{{ 'assets/video/video.mp4'|theme }}" type="video/mp4">
+    </video>
+</section>
+
+{% put scripts %}
+<script>
+    var slides = document.querySelectorAll('#slides .head_bg');
+    var currentSlide = 0;
+    var slideInterval = setInterval(nextSlide, 5000);
+
+    function nextSlide() {
+        slides[currentSlide].className = 'head_bg';
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].className = 'head_bg showing';
+    }
+</script>
+
+<script>
+    $('.portfolio_slider').owlCarousel({
+        loop: true,
+        nav: true,
+        items: 4,
+        margin: 30,
+        responsive: {
+            0: {
+                items: 1,
+            },
+            550: {
+                items: 2,
+            },
+            1025: {
+                items: 4,
+            }
+
+        }
+    })
+</script>
+
+<script>
+    var action = false,
+        clicked = false;
+    var Owl = {
+
+        init: function () {
+            Owl.carousel();
+        },
+
+        carousel: function () {
+            var owl;
+            $(document).ready(function () {
+
+                owl = $('.work_container').owlCarousel({
+                    items: 1,
+                    center: false,
+                    margin: 0,
+                    nav: false,
+                    dots: true,
+                    mouseDrag: false,
+                    autoplay: true,
+                    autoplayTimeout: 3000,
+                    autoplayHoverPause: true,
+                    loop: false,
+                    dotsContainer: '.work_paginator',
+
+                    navText: ['prev', 'next']
+
+
+                });
+
+                $('.owl-next').on('click', function () {
+                    action = 'next';
+                });
+
+                $('.owl-prev').on('click', function () {
+                    action = 'prev';
+                });
+
+                $('.work_paginator').on('click', 'a', function (e) {
+                    owl.trigger('to.owl.carousel', [$(this).index(), 300]);
+                });
+            });
+        }
+    };
+
+    $(document).ready(function () {
+        Owl.init();
+    });
+</script>
+
+<script>
+    $('.product_portfolio_slider').owlCarousel({
+        loop: true,
+        nav: true,
+        items: 1,
+        navText: ['назад', 'вперед']
+    });
+</script>
+{% endput %}

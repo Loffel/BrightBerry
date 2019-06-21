@@ -1,0 +1,16 @@
+columns:
+    name:
+        label: Имя
+        type: text
+        searchable: true
+        sortable: false
+    category_id:
+        label: Категория
+        type: text
+        select: title
+        relation: category
+    created_at:
+        label: 'Дата создания'
+        type: date
+        invisible: false
+        sortable: true

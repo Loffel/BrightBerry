@@ -1,0 +1,16 @@
+plugin:
+    name: 'dooko.products::lang.plugin.name'
+    description: 'dooko.products::lang.plugin.description'
+    author: Dooko
+    icon: oc-icon-beer
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Продукты
+        url: dooko/products/products
+        icon: icon-book
+        sideMenu:
+            side-menu-item:
+                label: Категории
+                url: dooko/products/categories
+                icon: icon-tags

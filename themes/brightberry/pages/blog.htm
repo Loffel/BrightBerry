@@ -1,0 +1,36 @@
+title = "Блог"
+url = "/blog"
+layout = "default"
+is_hidden = 0
+
+[blogPosts]
+pageNumber = "{{ :page }}"
+categoryFilter = "blog"
+postsPerPage = 8
+noPostsMessage = "Записи не найдены."
+sortOrder = "published_at desc"
+categoryPage = "blog"
+postPage = "blog"
+==
+{% set posts = blogPosts.posts %}
+
+<div class="blog">
+    <div class="container">
+        <h2>блог</h2>
+        <div class="blog_container">
+            {% for post in posts %}
+            <div class="blog_item {{ loop.index == 1 ? 'big' : ''}}">
+                {% for image in post.featured_images|slice(0, 1) %}
+                <div class="blog_item_img"><img src="{{ image.path }}" alt="{{ image.description != null ? image.description : image.filename }}" title="{{ image.title != null ? image.title : post.title }}"></div>
+                {% endfor %}
+                <p><small>{{ post.published_at|date('d.m.Y') }}</small><span>{{ post.title }}</span></p>
+                <div class="blog_desc">
+                    {{post.excerpt}}
+                    <a href="/blog/{{ post.slug }}">Подробнее...</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<a class="blog_btn yellow_btn" href="#">показать все</a>

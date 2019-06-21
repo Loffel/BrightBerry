@@ -1,0 +1,132 @@
+title = "Продукт"
+url = "/works/:category/:slug"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[builderDetails productDetails]
+modelClass = "Dooko\Products\Models\Product"
+identifierValue = "{{ :slug }}"
+modelKeyColumn = "slug"
+displayColumn = "name"
+notFoundMessage = "Запись не найдена"
+==
+<?php
+use Dooko\Products\Models\Product;
+use System\Models\File;
+
+function onStart(){
+    
+    $currentProduct = Product::where('slug', $this->param('slug'))->first();
+    
+    $this['isValid'] = true;
+    
+    // Cache::forget('tags');
+
+    $this['tags'] = Cache::remember('tags', 60, function() use ($currentProduct){
+        $tagsArray = array();
+        foreach($currentProduct->phototags as $tag) {
+            if(!in_array($tag->title, $tagsArray))
+                array_push($tagsArray, $tag->title);
+        }
+        return File::whereIn('title', $tagsArray)->get();
+    });
+    
+    if($this->param('category') != $currentProduct->category->slug){
+        $this['isValid'] = false;
+        return;
+    }
+    
+    if($currentProduct != NULL){
+        $this['prevExists'] = Product::where('category_id', $currentProduct->category_id)->where('id', '<', $currentProduct->id)->orderBy('id', 'desc')->first();
+        $this['nextExists'] = Product::where('category_id', $currentProduct->category_id)->where('id', '>', $currentProduct->id)->orderBy('id', 'asc')->first();
+    }
+
+    
+}
+
+function onEnd(){
+    if(isset($this->components['productDetails']->record))
+        $this->page->title = $this->components['productDetails']->record->attributes["name"];
+}
+?>
+==
+{% set product = productDetails.record %}
+
+{% if product and isValid %}
+    {% partial 'site/breadcrumbs' product_name=product.name category_name=product.category.title category_slug=product.category.slug %}
+    <div class="product">
+        <div class="container">
+            <div class="product_item">
+                <div class="product_text">
+                    <h2>{{ product.name }}</h2>
+                    {{ product.description_short|raw }}
+                </div>
+                <div class="product_img">
+                    <img src="{{ product.photo_thumb.path }}" alt="product.photo_thumb.description">
+                </div>
+            </div>
+            {% if prevExists != null %}
+            <a class="prod_prev" href="/products/{{prevExists.category.slug}}/{{prevExists.slug}}">предыдущий<br>объект</a>
+            {% endif %}
+            {% if nextExists != null %}
+            <a class="prod_next" href="/products/{{nextExists.category.slug}}/{{nextExists.slug}}">следующий<br>объект</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="product_portfolio">
+        <div class="container">
+            <h2>Портфолио</h2>
+            {% if product.category_id <= 3 %}
+            <div class="product_portfolio_slider">
+                {% for photo in product.photo_gallery %}
+                <div class="product_portfolio_item" style="background: url({{photo.path}})">
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {{ product.description|raw }}
+            <div class="product_blocks">
+                {% if product.category_id <= 3 %}
+
+                    {% for photo in tags %}
+                    <div class="product_block">
+                            <img src="{{photo.path}}" alt="photo.description">
+                        </div>
+                    {% endfor %}
+                
+                {% else %}
+                
+                    {% for photo in product.photo_gallery_add %}
+                    <div class="product_block">
+                        <img src="{{photo.path}}" alt="photo.description">
+                    </div>
+                    {% endfor %}
+                
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% put scripts %}
+    <script>
+        $('.product_portfolio_slider').owlCarousel({
+            loop: true,
+            nav: true,
+            items: 1,
+            navText: ['назад', 'вперед']
+        });
+    </script>
+    {% endput %}
+{% else %}
+    <div class="product">
+        <div class="container">
+            <div class="product_item">
+                <div class="product_text">
+                    <h2>Продукт не найден</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

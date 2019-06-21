@@ -1,0 +1,49 @@
+title = "Категория"
+url = "/works/:slug/:page?"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[builderList productsList]
+modelClass = "Dooko\Products\Models\Product"
+scope = "scopeSpecificCategory"
+scopeValue = "{{ :slug }}"
+displayColumn = "name"
+noRecordsMessage = "No records found"
+detailsPage = "product"
+detailsKeyColumn = "id"
+detailsUrlParameter = "id"
+recordsPerPage = 6
+pageNumber = "{{ :page }}"
+==
+<?php
+use Dooko\Products\Models\Category;
+
+function onEnd(){
+    $category = Category::where('slug',$this->param('slug'))->first();
+
+    if(isset($category)) {
+        $this->page->title = $this['category_name'] = $category->title;
+    }
+}
+?>
+==
+{% partial 'site/breadcrumbs' product_name=category_name %}
+<div class="house">
+    <div class="container">
+        <h2>{{category_name}}</h2>
+        <div class="house_container">
+            {% for product in productsList.records %}
+            <a href="/works/{{product.category.slug}}/{{product.slug}}" class="house_item">
+                <div class="house_item_img"><img src="{{product.photo_thumb.path}}" alt="{{product.photo_thumb.description}}"></div>
+                <p><span>{{product.name}}</span></p>
+                <div class="house_desc">
+                    {{ html_strip(product.description_short|raw) }}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<a class="house_btn yellow_btn" href="#">показать все</a>

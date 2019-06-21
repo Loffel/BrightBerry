@@ -1,0 +1,21 @@
+<style>
+.select2-container{
+    width: 100%!important;
+    display: block;
+}
+</style>
+
+<select class="s2" name="<?php echo $name ?>" id="" multiple>
+    <?php foreach($tags as $tag): ?>
+    <option value="<?php echo $tag->id ?>" <?php echo in_array($tag->id, $selectedValues) ? 'selected="selected"':''; ?>><?php echo $tag->title ?></option>
+    <?php endforeach; ?>
+</select>
+
+<script type="text/javascript">
+    $(document).on('render', function(){
+        $('.s2').select2({
+            placeholder: 'Добавьте объект',
+            tags: true
+        });
+    });
+</script>

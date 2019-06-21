@@ -1,0 +1,80 @@
+fields:
+    name:
+        label: Название
+        span: left
+        placeholder: 'Введите название продукта'
+        required: 1
+        type: text
+    photo_thumb:
+        label: Обложка
+        mode: image
+        imageWidth: '100'
+        imageHeight: '100'
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    slug:
+        label: Слаг
+        span: full
+        preset:
+            field: name
+            type: slug
+        type: text
+    description_short:
+        label: 'Краткое описание'
+        size: ''
+        span: full
+        type: richeditor
+    description:
+        label: Описание
+        size: ''
+        span: full
+        required: 1
+        type: richeditor
+    category:
+        label: Категория
+        nameFrom: title
+        descriptionFrom: description
+        span: full
+        type: relation
+    photo_gallery:
+        label: Галерея
+        mode: image
+        imageWidth: '80'
+        imageHeight: '80'
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: left
+        type: fileupload
+    photo_gallery_add:
+        label: 'Доп. галерея'
+        mode: image
+        imageWidth: '50'
+        imageHeight: '50'
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: right
+        type: fileupload
+    phototags:
+        label: 'Хеш-теги вложенных объектов'
+        span: full
+        type: phototags
+    seo_title:
+        label: '[SEO] Заголовок'
+        span: full
+        type: text
+    seo_description:
+        label: '[SEO] Описание'
+        span: full
+        type: text
+    seo_keywords:
+        label: '[SEO] Ключевые слова'
+        span: full
+        type: text
