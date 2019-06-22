@@ -126,4 +126,16 @@ pageNumber = "{{ :page }}"
         }
     })
 </script>
+
+<script>
+$(document).ready(function(){
+    items = $('.portfolio_slider_item');
+
+    items.each(function(){
+        if($(this).find("p > span").outerHeight() < 40){
+            $(this).find('p > span').prepend("<br>");
+        }
+    });
+});
+</script>
 {% endput %}

@@ -24,13 +24,13 @@ function onStart(){
     
     //Cache::forget('tags-'.$currentProduct->id);
 
-    $this['tags'] = Cache::remember('tags-'.$currentProduct->id, 60, function() use ($currentProduct){
+    $this['tags'] = Cache::remember('tags-'.$currentProduct->id, 15, function() use ($currentProduct){
         $tagsArray = array();
         foreach($currentProduct->phototags as $tag) {
             if(!in_array($tag->title, $tagsArray))
                 array_push($tagsArray, $tag->title);
         }
-        return File::whereIn('title', $tagsArray)->get();
+        return File::whereIn('title', $tagsArray)->limit(10)->get();
     });
     
     if($this->param('category') != $currentProduct->category->slug){
@@ -64,7 +64,7 @@ function onEnd(){
                     {{ product.description_short|raw }}
                 </div>
                 <div class="product_img">
-                    <img src="{{ product.photo_thumb.path }}" alt="{{ product.photo_thumb.description }}">
+                    <img src="{{ product.photo_thumb | resize(412, 390, {mode: 'exact'}) }}" alt="{{ product.photo_thumb.description }}">
                 </div>
             </div>
             {% if prevExists != null %}
@@ -81,7 +81,7 @@ function onEnd(){
             {% if product.category_id <= 3 %}
             <div class="product_portfolio_slider">
                 {% for photo in product.photo_gallery %}
-                <div class="product_portfolio_item" style="background: url({{photo.path}})">
+                <div class="product_portfolio_item" style="background: url({{photo | resize(1200, 600, {mode: 'landscape'})}})">
                 </div>
                 {% endfor %}
             </div>
@@ -92,7 +92,7 @@ function onEnd(){
 
                     {% for photo in tags %}
                     <div class="product_block">
-                            <img src="{{photo.path}}" alt="photo.description">
+                            <img src="{{photo.path }}" alt="{{photo.description}}">
                         </div>
                     {% endfor %}
                 

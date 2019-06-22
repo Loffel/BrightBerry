@@ -1,0 +1,63 @@
+title = "import_tags"
+url = "/import_tags"
+is_hidden = 1
+robot_index = "index"
+robot_follow = "follow"
+==
+<?php
+use Dooko\Products\Models\Product;
+use Dooko\Products\Models\Category;
+
+function onStart(){
+    $products = Product::where('category_id', '<=', 3)->get();
+
+    foreach($products as $product) {
+        $tags = Db::select(Db::raw("SELECT name FROM categories WHERE id IN (SELECT category_parent_id FROM images2categories WHERE child_id IN (SELECT id FROM images WHERE object_id = (SELECT id FROM products WHERE name = (SELECT name FROM dooko_products_ WHERE id = $product->id LIMIT 1) LIMIT 1)) GROUP BY category_parent_id)"));
+
+        $tagsArray = array();
+        $queryArray = array();
+
+        foreach($tags as $tag){
+            array_push($tagsArray, '#'.mb_strtolower(str_replace(' ', '', $tag->name)));
+        }
+
+        $filesArray = Db::table('system_files')->whereIn('title', $tagsArray)->groupBy('title')->get();
+
+        foreach($filesArray as $file){
+            array_push($queryArray, array(
+                'product_id' => $product->id,
+                'file_id' => $file->id
+            ));
+        }
+
+        if(!empty($queryArray)){
+            Db::table('dooko_products_prods_tags')->insert($queryArray);
+        }
+
+        
+    }
+    dd('Done!');
+    /*
+    foreach($products as $product){
+        $dataProds = Db::table('products')->where('name', $product->name)->first();
+        $dataImgs = Db::table('images')->where('object_id', $dataProds->id)->get();
+        
+        $resultData = array();
+
+        foreach($dataImgs as $img){
+            $dataImgs2 = Db::table('images2categories')->where('child_id', $img->id)->groupBy('category_parent_id')->get();
+
+            foreach($dataImgs2 as $img2){
+                $dataTemp = Db::table('categories')->where('id', $img2->category_parent_id)->first();
+                array_push($resultData, $dataTemp->name);
+            }
+
+            //dd($dataImgs);
+        }
+        
+        dd($resultData);
+    }*/
+
+}
+?>
+==

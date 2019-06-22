@@ -12,6 +12,44 @@ sortOrder = "published_at desc"
 categoryPage = "blog"
 postPage = "blog"
 ==
+<?php
+use Carbon\Carbon;
+
+function onLoadMore(){
+    $posts = Db::table('rainlab_blog_posts')->offset(8)->limit(10000)->orderBy('published_at', 'desc')->get();
+
+    $posts_html = "";
+
+    foreach($posts as $post){
+        $thumb_path = '';
+        $thumb_title = '';
+        $thumb_alt = '';
+
+        if(isset($post->photo_thumb)) {
+            $thumb_path = $post->featured_images[0]->path;
+            $thumb_title = $post->featured_images[0]->title != null ? $post->featured_images[0]->title : $post->title;
+            $thumb_alt = $post->featured_images[0]->description != null ? $post->featured_images[0]->description : $post->featured_images[0]->filename;
+        }
+
+        $posts_html .= '<div class="blog_item">
+                <div class="blog_item_img">
+                    <img src="'.$thumb_path.'" alt="'.$thumb_alt.'" title="'.$thumb_title.'">
+                </div>
+                <p><small>'.Carbon::parse($post->published_at)->format('d.m.Y').'</small><span>'.$post->title.'</span></p>
+                <div class="blog_desc">
+                    '.$post->excerpt.'
+                    <a href="/blog/'.$post->slug.'">Подробнее...</a>
+                </div>
+            </div>';
+    }
+
+    return [
+        '@.blog_container' => $posts_html,
+        '#loadMoreButton' => ''
+    ];
+}
+?>
+==
 {% set posts = blogPosts.posts %}
 
 <div class="blog">
@@ -20,9 +58,11 @@ postPage = "blog"
         <div class="blog_container">
             {% for post in posts %}
             <div class="blog_item {{ loop.index == 1 ? 'big' : ''}}">
+                <div class="blog_item_img">
                 {% for image in post.featured_images|slice(0, 1) %}
-                <div class="blog_item_img"><img src="{{ image.path }}" alt="{{ image.description != null ? image.description : image.filename }}" title="{{ image.title != null ? image.title : post.title }}"></div>
+                    <img src="{{ image.path }}" alt="{{ image.description != null ? image.description : image.filename }}" title="{{ image.title != null ? image.title : post.title }}">
                 {% endfor %}
+                </div>
                 <p><small>{{ post.published_at|date('d.m.Y') }}</small><span>{{ post.title }}</span></p>
                 <div class="blog_desc">
                     {{post.excerpt}}
@@ -33,4 +73,4 @@ postPage = "blog"
         </div>
     </div>
 </div>
-<a class="blog_btn yellow_btn" href="#">показать все</a>
+<div id="loadMoreButton"><a data-request="onLoadMore" class="house_btn yellow_btn" href="#">показать все</a></div>

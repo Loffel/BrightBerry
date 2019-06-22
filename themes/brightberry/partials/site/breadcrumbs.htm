@@ -6,12 +6,12 @@
             {% if this.page.id == 'blog-post' %}
             <a href="/blog">Блог</a>
             {% else %}
-            <a href="/products">Портфолио</a>
+            <a href="/works">Портфолио</a>
             {% endif %}
             <img src="{{ 'assets/images/arrow.png'|theme }}" alt="">
 
             {% if this.page.id == 'product' %}
-            <a href="/products/category/{{ category_slug }}">{{category_name}}</a>
+            <a href="/works/{{ category_slug }}">{{category_name}}</a>
             <img src="{{ 'assets/images/arrow.png'|theme }}" alt="">
             {% endif %}
          <span>{{ product_name }}</span>

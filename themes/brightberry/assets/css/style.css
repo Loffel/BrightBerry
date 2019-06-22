@@ -1025,6 +1025,7 @@ header.other_page .menu {
 
 .house_item img {
 	height: 100%;
+	width: 100%;
 	transform: scale(1.2);
 	transition: 2s;
 }
@@ -1221,6 +1222,7 @@ header.other_page .menu {
 
 .blog_item img {
 	height: 100%;
+	width: 100%;
 }
 
 .blog_item:hover p:before {
@@ -2031,7 +2033,8 @@ color:#f68b1f;
 }
 
 .product_block img {
-	height: 100%;
+	/* height: 100%; */
+	width: 140%;
 }
 .product_block:before {
 	content: "";
