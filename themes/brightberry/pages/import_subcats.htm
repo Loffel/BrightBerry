@@ -7,6 +7,7 @@ robot_follow = "follow"
 <?php
 use Dooko\Products\Models\Product;
 use Dooko\Products\Models\Category;
+use System\Models\File;
 
 function onStart(){
     ini_set('max_execution_time', 6000);
@@ -57,8 +58,16 @@ function onStart(){
         if(!empty($product_images)){
             $tempImage = new System\Models\File;
 
+            $filteredThumb = $product_images->filter(function($item){
+                return $item->is_cover == 1;
+            })->first();
+
+            if($filteredThumb != NULL)
+                $thumbURL = $filteredThumb->url;
+            else $thumbURL = $product_images[0]->url;
+
             try{
-                $tempImage->fromUrl($baseURL.$product_images[0]->url);
+                $tempImage->fromUrl($baseURL.$thumbURL);
                 
                 $prod->photo_thumb()->add($tempImage);
             }catch(Exception $e){
@@ -69,7 +78,23 @@ function onStart(){
         foreach($product_images as $image){
             if(str_contains($image->caption, "youtube")) continue;
             $tempImage = new System\Models\File;
-            $tempImage->title = '#'.mb_strtolower(str_replace(' ', '', $prod->name));
+
+            if(File::where('file_name', $image->name.'.jpg')->first() != null) continue;
+
+            $tempCats = Db::select(Db::raw("SELECT name FROM categories WHERE id IN (SELECT category_parent_id FROM images2categories WHERE child_id = $image->id GROUP BY category_parent_id)"));
+            $catsString = "";
+
+
+            $tempI = 1;
+            foreach($tempCats as $tempCat){
+                $catsString .= '#'.mb_strtolower(str_replace(' ', '', $tempCat->name));
+
+                if($tempI != count($tempCats)) $catsString .= ',';
+                ++$tempI;
+            }
+
+            $tempImage->title = $catsString;
+
             try{
                 $tempImage->fromUrl($baseURL.$image->url);
                 $prod->photo_gallery_add()->add($tempImage);

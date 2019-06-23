@@ -31,7 +31,7 @@ function onStart(){
     */
 
     foreach($products as $product){
-        $product_images = Db::table('images')->where('object_type', 'products')->where('object_id', $product->id)->get();
+        $product_images = Db::table('images')->where('object_type', 'products')->where('object_id', $product->id)->orderBy('is_main', 'DESC')->get();
         $product_seo = Db::table('seo')->where('url', 'works/obekty/'.$product->url)->first();
         
         $cat = Db::table('categories')->where('id', $product->parent_id)->first();
@@ -39,9 +39,9 @@ function onStart(){
         $prod = new Product;
 
         $prod->name = $product->name;
-        $prod->description = $product->description;
+        $prod->description = $product->description == '' ? $product->short_description : $product->description;
         $prod->category_id = ($cat->url != 'gosudarstvennye-obekty') ? (Category::where('slug', $cat->url)->first())->id : 3;
-        $prod->description_short = $product->short_description;
+        $prod->description_short = $product->short_description == '' ? $product->description : $product->short_description;
         $prod->slug = $product->url;
         $prod->seo_title = $product->meta_title;
         $prod->seo_description = $product->meta_description;
@@ -56,8 +56,16 @@ function onStart(){
         if(!empty($product_images)){
             $tempImage = new System\Models\File;
 
+            $filteredThumb = $product_images->filter(function($item){
+                return $item->is_cover == 1;
+            })->first();
+
+            if($filteredThumb != NULL)
+                $thumbURL = $filteredThumb->url;
+            else $thumbURL = $product_images[0]->url;
+
             try{
-                $tempImage->fromUrl($baseURL.$product_images[0]->url);
+                $tempImage->fromUrl($baseURL.$thumbURL);
                 
                 $prod->photo_thumb()->add($tempImage);
             }catch(Exception $e){
@@ -70,18 +78,34 @@ function onStart(){
             if(str_contains($image->caption, "youtube")) continue;
             $tempImage = new System\Models\File;
 
+            $tempCats = Db::select(Db::raw("SELECT name FROM categories WHERE id IN (SELECT category_parent_id FROM images2categories WHERE child_id = $image->id GROUP BY category_parent_id)"));
+            $catsString = "";
+
+            $tempI = 1;
+            foreach($tempCats as $tempCat){
+                $catsString .= '#'.mb_strtolower(str_replace(' ', '', $tempCat->name));
+
+                if($tempI != count($tempCats)) $catsString .= ',';
+                ++$tempI;
+            }
+            //dd($catsString);
+            $tempImage->title = $catsString;
+
             try{
                 $tempImage->fromUrl($baseURL.$image->url);
                 
-                if($prod->category_id <= 3 && $loopIndex <= 5)
+                if($prod->category_id <= 3 && $loopIndex <= 5) {
                     $prod->photo_gallery()->add($tempImage);
-                else if($prod->category() > 3) $prod->photo_gallery_add()->add($tempImage);
+                }else if($prod->category_id <=3 && $loopIndex > 5){
+                    $prod->photo_gallery_add()->add($tempImage);
+                }
                 
             }catch(Exception $e){
 
             }
             ++$loopIndex;
         }
+
     }
 
     dd('Done!');

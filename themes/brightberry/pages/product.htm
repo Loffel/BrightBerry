@@ -19,18 +19,13 @@ use System\Models\File;
 function onStart(){
     
     $currentProduct = Product::where('slug', $this->param('slug'))->first();
-    
+
     $this['isValid'] = true;
     
     //Cache::forget('tags-'.$currentProduct->id);
 
     $this['tags'] = Cache::remember('tags-'.$currentProduct->id, 15, function() use ($currentProduct){
-        $tagsArray = array();
-        foreach($currentProduct->phototags as $tag) {
-            if(!in_array($tag->title, $tagsArray))
-                array_push($tagsArray, $tag->title);
-        }
-        return File::whereIn('title', $tagsArray)->limit(10)->get();
+        return File::where('title', 'like','%#'.mb_strtolower(str_replace(' ', '', $currentProduct->name)).'%')->groupBy('file_name')->get();
     });
     
     if($this->param('category') != $currentProduct->category->slug){
@@ -90,18 +85,18 @@ function onEnd(){
             <div class="product_blocks">
                 {% if product.category_id <= 3 %}
 
-                    {% for photo in tags %}
+                    {% for photo in product.photo_gallery_add %}
                     <div class="product_block">
-                            <img src="{{photo.path }}" alt="{{photo.description}}">
-                        </div>
+                        <img src="{{photo | resize(540, 486, {mode: 'crop'})}}" alt="{{photo.description}}">
+                    </div>
                     {% endfor %}
                 
                 {% else %}
                 
-                    {% for photo in product.photo_gallery_add %}
+                    {% for photo in tags %}
                     <div class="product_block">
-                        <img src="{{photo.path}}" alt="photo.description">
-                    </div>
+                            <img src="{{photo | resize(540, 486, {mode: 'crop'}) }}" alt="{{photo.description}}">
+                        </div>
                     {% endfor %}
                 
                 {% endif %}

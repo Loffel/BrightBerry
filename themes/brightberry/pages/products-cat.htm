@@ -67,7 +67,7 @@ function onLoadMore(){
         <div class="house_container">
             {% for product in productsList.records %}
             <a href="/works/{{product.category.slug}}/{{product.slug}}" class="house_item">
-                <div class="house_item_img"><img src="{{product.photo_thumb.path}}" alt="{{product.photo_thumb.description}}"></div>
+                <div class="house_item_img"><img src="{{product.photo_thumb | resize(540, 450, {mode: 'crop'})}}" alt="{{product.photo_thumb.description}}"></div>
                 <p><span>{{product.name}}</span></p>
                 <div class="house_desc">
                     {{ html_strip(product.description_short|raw) }}

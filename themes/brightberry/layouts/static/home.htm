@@ -126,7 +126,7 @@ recaptcha_size = "normal"
                         {{ about_text|raw }}
                     </div>
                     <div class="about_img">
-                        <img src="{{ about_photo|media }}" alt="{{ about_photo_alt }}">
+                        <img src="{{ about_photo| media | resize(445, 422, {mode: 'crop'}) }}" alt="{{ about_photo_alt }}">
                     </div>
                 </div>
             </div>
@@ -192,7 +192,7 @@ recaptcha_size = "normal"
                             {{ step.description|raw }}
                         </div>
                         <div class="work_img">
-                            <img src="{{ step.photo|media }}" alt="{{ step.photo_alt }}">
+                            <img src="{{ step.photo|media | resize(405, 565, {mode: 'auto'}) }}" alt="{{ step.photo_alt }}">
                             <span>Договор</span>
                         </div>
                     </div>

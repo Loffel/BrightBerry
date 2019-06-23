@@ -2034,7 +2034,7 @@ color:#f68b1f;
 
 .product_block img {
 	/* height: 100%; */
-	width: 140%;
+	width: 100%;
 }
 .product_block:before {
 	content: "";
