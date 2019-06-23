@@ -62,10 +62,6 @@ fields:
             extension: auto
         span: right
         type: fileupload
-    phototags:
-        label: 'Хеш-теги вложенных объектов'
-        span: full
-        type: phototags
     seo_title:
         label: '[SEO] Заголовок'
         span: full
