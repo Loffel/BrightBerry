@@ -21,12 +21,15 @@ function onStart(){
     $currentProduct = Product::where('slug', $this->param('slug'))->first();
 
     $this['isValid'] = true;
+    $this['tags'] = '';
     
     //Cache::forget('tags-'.$currentProduct->id);
 
-    $this['tags'] = Cache::remember('tags-'.$currentProduct->id, 15, function() use ($currentProduct){
-        return File::where('title', 'like','%#'.mb_strtolower(str_replace(' ', '', $currentProduct->name)).'%')->groupBy('file_name')->get();
-    });
+    if($currentProduct->category_id > 3){
+        $this['tags'] = Cache::remember('tags-'.$currentProduct->id, 15, function() use ($currentProduct){
+            return File::where('title', 'like','%#'.mb_strtolower(str_replace(' ', '', $currentProduct->name)).'%')->groupBy('file_name')->get();
+        });
+    }
     
     if($this->param('category') != $currentProduct->category->slug){
         $this['isValid'] = false;
