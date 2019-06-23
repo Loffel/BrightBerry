@@ -52,4 +52,8 @@ class Product extends Model
             return $query->where('category_id', $category->id);
         else return $query;
     }
+
+    public function getHashtag(){
+        return '#'.mb_strtolower(str_replace(' ', '', $this->name));
+    }
 }

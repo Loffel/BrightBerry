@@ -398,6 +398,8 @@ class FileUpload extends FormWidgetBase
             'build' => 'core',
             'cache'  => 'false'
         ]);
+        $this->addJs('js/autocomplete.js');
+        $this->addCss('css/autocomplete.css');
     }
 
     /**

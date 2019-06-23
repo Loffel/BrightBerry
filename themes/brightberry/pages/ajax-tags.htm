@@ -1,0 +1,22 @@
+title = "[AJAX] Теги"
+url = "/ajax/tags"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+==
+<?php
+use Dooko\Products\Models\Product;
+
+function onStart(){
+    $products = Product::where('category_id', '>', 3)->get();
+
+    $proudctsNames = array();
+
+    foreach($products as $product){
+        array_push($proudctsNames, $product->getHashtag());
+    }
+
+    return $proudctsNames;
+}
+?>
+==
