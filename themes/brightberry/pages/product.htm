@@ -17,8 +17,11 @@ use Dooko\Products\Models\Product;
 use System\Models\File;
 
 function onStart(){
-    
     $currentProduct = Product::where('slug', $this->param('slug'))->first();
+
+    $this->page->meta_title = $currentProduct->seo_title;
+    $this->page->meta_description = $currentProduct->seo_description;
+    $this->page->meta_keywords = $currentProduct->seo_keywords;
 
     $this['isValid'] = true;
     $this['tags'] = '';
