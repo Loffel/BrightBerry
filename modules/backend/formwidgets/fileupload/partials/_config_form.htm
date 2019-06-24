@@ -94,7 +94,7 @@
         }).done(function(data){
             testObj = data;
 
-            $('input[name="Product[photo_gallery_add][title]"]')
+            $('input[name="Product[photo_gallery_add][title]"], input[name="Product[photo_gallery][title]"]')
             .on( "keydown", function( event ) {
                 if ( event.keyCode === $.ui.keyCode.TAB &&
                     $( this ).autocomplete( "instance" ).menu.active ) {
