@@ -62,7 +62,7 @@ function onEnd(){
                     {{ product.description_short|raw }}
                 </div>
                 <div class="product_img">
-                    <img src="{{ product.photo_thumb | resize(412, 390, {mode: 'exact'}) }}" alt="{{ product.photo_thumb.description }}">
+                    <img src="{{ product.photo_thumb | resize(412, 390, {mode: 'crop'}) }}" alt="{{ product.photo_thumb.description }}">
                 </div>
             </div>
             {% if prevExists != null %}

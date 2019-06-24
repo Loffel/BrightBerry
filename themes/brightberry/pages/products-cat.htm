@@ -20,6 +20,7 @@ pageNumber = "{{ :page }}"
 <?php
 use Dooko\Products\Models\Category;
 use Dooko\Products\Models\Product;
+use ToughDeveloper\ImageResizer\Classes\Image;
 
 function onEnd(){
     $category = Category::where('slug',$this->param('slug'))->first();
@@ -40,12 +41,12 @@ function onLoadMore(){
         $thumb_desc = '';
 
         if(isset($product->photo_thumb)) {
-            $thumb_path = $product->photo_thumb->path;
+            $thumb_path = new Image($product->photo_thumb->path);
             $thumb_desc = $product->photo_thumb->description;
         }
 
         $products_html .= '<a href="/works/'.$product->category->slug.'/'.$product->slug.'" class="house_item">
-            <div class="house_item_img"><img src="'.$thumb_path.'" alt="'.$thumb_desc.'"></div>
+            <div class="house_item_img"><img src="'.$thumb_path->resize(540, 450, ['mode' => 'crop']).'" alt="'.$thumb_desc.'"></div>
             <p><span>'.$product->name.'</span></p>
             <div class="house_desc">
                 '.strip_tags($product->description_short).'
@@ -68,7 +69,7 @@ function onLoadMore(){
             {% for product in productsList.records %}
             <a href="/works/{{product.category.slug}}/{{product.slug}}" class="house_item">
                 <div class="house_item_img"><img src="{{product.photo_thumb | resize(540, 450, {mode: 'crop'})}}" alt="{{product.photo_thumb.description}}"></div>
-                <p><span>{{product.name}}</span></p>
+                <p><span>{{product.name | raw}}</span></p>
                 <div class="house_desc">
                     {{ html_strip(product.description_short|raw) }}
                 </div>
