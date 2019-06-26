@@ -20,10 +20,6 @@ function onStart(){
     $currentProduct = Product::where('slug', $this->param('slug'))->first();
 
     $this->page->meta_title = $currentProduct->seo_title;
-
-    if(isset($this->page->meta_title) && $this->page->meta_title != '')
-        $this->page->title = $this->page->meta_title;
-
     $this->page->meta_description = $currentProduct->seo_description;
     $this->page->meta_keywords = $currentProduct->seo_keywords;
 
@@ -52,8 +48,12 @@ function onStart(){
 }
 
 function onEnd(){
-    if(isset($this->components['productDetails']->record))
-        $this->page->title = $this->components['productDetails']->record->attributes["name"];
+    if(isset($this->components['productDetails']->record)){
+        if(isset($this->page->meta_title) && $this->page->meta_title != '')
+            $this->page->title = $this->page->meta_title;
+        else
+            $this->page->title = $this->components['productDetails']->record->attributes["name"];
+    }
 }
 ?>
 ==
