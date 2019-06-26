@@ -41,12 +41,12 @@ function onLoadMore(){
         $thumb_desc = '';
 
         if(isset($product->photo_thumb)) {
-            $thumb_path = new Image($product->photo_thumb->path);
+            $thumb_path = new Image($product->photo_thumb->path)->resize(540, 450, ['mode' => 'crop']);
             $thumb_desc = $product->photo_thumb->description;
         }
 
         $products_html .= '<a href="/works/'.$product->category->slug.'/'.$product->slug.'" class="house_item">
-            <div class="house_item_img"><img src="'.$thumb_path->resize(540, 450, ['mode' => 'crop']).'" alt="'.$thumb_desc.'"></div>
+            <div class="house_item_img"><img src="'.$thumb_path.'" alt="'.$thumb_desc.'"></div>
             <p><span>'.$product->name.'</span></p>
             <div class="house_desc">
                 '.strip_tags($product->description_short).'
