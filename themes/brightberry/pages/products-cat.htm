@@ -41,7 +41,8 @@ function onLoadMore(){
         $thumb_desc = '';
 
         if(isset($product->photo_thumb)) {
-            $thumb_path = new Image($product->photo_thumb->path)->resize(540, 450, ['mode' => 'crop']);
+            $thumb_path = new Image($product->photo_thumb->path);
+            $thumb_path = $thumb_path->resize(540, 450, ['mode' => 'crop']);
             $thumb_desc = $product->photo_thumb->description;
         }
 
