@@ -21,7 +21,7 @@ function onStart(){
 
     $this->page->meta_title = $currentProduct->seo_title;
 
-    if(isset($this->page->meta_title) && !empty($this->page->meta_title))
+    if(isset($this->page->meta_title) && $this->page->meta_title != '')
         $this->page->title = $this->page->meta_title;
 
     $this->page->meta_description = $currentProduct->seo_description;
