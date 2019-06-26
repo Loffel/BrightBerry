@@ -20,6 +20,10 @@ function onStart(){
     $currentProduct = Product::where('slug', $this->param('slug'))->first();
 
     $this->page->meta_title = $currentProduct->seo_title;
+
+    if(isset($this->page->meta_title) && !empty($this->page->meta_title))
+        $this->page->title = $this->page->meta_title;
+
     $this->page->meta_description = $currentProduct->seo_description;
     $this->page->meta_keywords = $currentProduct->seo_keywords;
 
